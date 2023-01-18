@@ -31,6 +31,7 @@ router.get('/eventos', function(req, res, next) {
 
 /*página produtos*/
 router.get('/produtos', produtosController.index);
+router.get('/produtos/:tipo', produtosController.show);
 
 /* pagina Parceiros*/
 router.get('/parceiros', function(req, res, next) {
