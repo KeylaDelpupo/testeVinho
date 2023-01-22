@@ -1,4 +1,14 @@
-const produtos = require("../database/produtos.json");
+const s = require ("../database/produtos.json")
+const fs = require('fs')
+const path = require("path");
+const produtosJson = fs.readFileSync(
+    // Caminho do arquivo
+    path.join(__dirname, "..", "database", "produtos.json"),
+    // Formato de leitura
+    "utf-8"
+);
+
+const produtos = JSON.parse(produtosJson);
 
 
 module.exports = {
@@ -70,13 +80,29 @@ module.exports = {
     },
     //apagar o item do banco
     destroy:(req, res)=>{
-        // const { id } = req.params;
-        // var produto = produtos.filter((prod) => prod.id != id);
-        // const stringifyData = JSON.stringify(produto);
-        // fs.writeFileSync('produtos.json', stringifyData)
+        //Pego id do produto atraves do parametro da url
+        const { id } = req.params;
 
-        //depois que implentar faz redirect
-        res.redirect("/admin/produto")
+        //Faço filtro para criar um novo array sem o produto com o id correspondente
+        var produto = produtos.filter((prod) => prod.id != id);
+
+        //crio variavél que vai guardar o caminho onde quero salvar o novo array
+        var caminho = path.join(__dirname, "..", "database", "produtos.json")
+       
+        // uso metodo whiteFile do FS para escrever o novo arquivo json (ira substiuir o exesitente)
+        fs.writeFile(caminho, JSON.stringify(produto), 'utf-8', (error, result)=>{
+            if (error){
+                console.log (error);
+                return;
+            }
+
+        });
+       //reinderizo novamente a pagina que lista produtos para tabela vir atualizada
+        return res.render("adminListar", {
+            produtos:produto,
+            css1: "/stylesheets/menu-footer.css",
+            css2: "/stylesheets/adminListar.css",
+        })
         
 
     }
