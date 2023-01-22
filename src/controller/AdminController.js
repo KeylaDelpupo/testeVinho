@@ -97,7 +97,7 @@ module.exports = {
             }
 
         });
-       //reinderizo novamente a pagina que lista produtos para tabela vir atualizada
+       //renderizo novamente a pagina que lista produtos para tabela vir atualizada
         return res.render("adminListar", {
             produtos:produto,
             css1: "/stylesheets/menu-footer.css",
