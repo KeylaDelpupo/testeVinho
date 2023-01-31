@@ -1,6 +1,7 @@
 var express = require('express');
 const IndexController = require('../controller/indexController');
 const produtosController = require('../controller/produtosController');
+const produtos = require("../database/produtos.json");
 
 var router = express.Router();
 
@@ -31,6 +32,7 @@ router.get('/eventos', function(req, res, next) {
 
 /*página produtos*/
 router.get('/produtos', produtosController.index);
+router.get('/produtos/:tipo', produtosController.show);
 
 /* pagina Parceiros*/
 router.get('/parceiros', function(req, res, next) {
@@ -63,10 +65,26 @@ router.get('/produto-interno', function(req, res, next) {
      css2: "/stylesheets/prod-interno.css",
   });
 });
+router.get('/produto-interno/:id', function (req, res, next) {
+  const { id } = req.params;
+  var produto = produtos.filter((prod) => prod.id == id);
+  produto = produto[0]
+  var arrayImg = produto.imagem;
+  var img = arrayImg[0]
+  console.log(produto)
+  produto.imagem = img
+  res.render('prod-interno', {produto,
+    css1: "/stylesheets/menu-footer.css",
+    css2: "/stylesheets/prod-interno.css",
+  });
+});
 
 /* pagina cadastro-prod*/
 router.get('/cadastro-produto', function(req, res, next) {
-  res.render('cadastro-prod', {
+  var produto = new Object();
+  produto = {};
+  console.log(produto)
+  res.render('cadastro-prod', { produto,
     css1: "/stylesheets/menu-footer.css",
     css2: "/stylesheets/cadastro-prod.css",
   });

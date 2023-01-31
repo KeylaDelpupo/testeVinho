@@ -78,7 +78,7 @@ window.addEventListener('load', function() {
     imgError.style.display = 'none';
   })
 
-  formulario.addEventListener('submit', function(event) {
+ /* formulario.addEventListener('submit', function(event) {
     event.preventDefault();
 
     const listCategorias = document.getElementsByName('tipos-categorias');
@@ -117,5 +117,5 @@ window.addEventListener('load', function() {
     if(nome.value && descricao.value && preco.value > 0 && checkRadio != null && imgProduto.files.length > 0) {
       descricaoSucess.style.display = 'flex';
     }
-  })
+  })*/
 });

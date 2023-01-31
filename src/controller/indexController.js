@@ -1,5 +1,6 @@
 const produtosModel = require('../models/produtosModel');
 
+
 module.exports = {
     index: (req, res) => {
         // controller comunicando com o model
@@ -10,4 +11,5 @@ module.exports = {
             css2: "/stylesheets/menu-footer.css"
         });
     }
+  
 }

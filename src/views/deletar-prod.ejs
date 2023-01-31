@@ -2,26 +2,20 @@
 
     <main>
         <h1>
-            <% if(locals.titulo){%>
-                <%=titulo%>
-
-            <% } else { %>
-                CADASTRAR NOVO PRODUTO
-            <%} %>
+           
+                DELETAR PRODUTO
+          
         </h1>
         <hr>
-        <% if (produto) { %>
-            <form class="form" id="formulario" action="/admin/produto/editar/<%=produto.id%>" method="post">
-            <% } else { %>
-                <form class="form" id="formulario" action="/admin/produto/novo" method="post">
-                <% } %>
-        
+       
+            <form class="form" id="formulario" action="/admin/produto/deletar/<%=produto.id%>?_method=delete" method="post">
+            
             <section class="section-filha-form section-container1">
                 <em>
 
                     Nome do produto:
                 </em>
-                <input class="inpt nome" type="text" value="<%=produto? produto.nome:'' %>"
+                <input class="inpt nome" type="text" value="<%=produto.nome%>"
                     placeholder="Digite aqui o nome do produto">
                 <span role="alert" id="nameError" aria-hidden="true">O campo nome não pode estar vazio</span>
                 <em>
@@ -37,11 +31,9 @@
                     <em>
                         Imagem do produto:
                     </em>
-                    <% if (produto) { %>
+                    
                         <img src="/images/tela-produtos/<%=produto.imagem%>.png" alt="Selecione uma imagem" id="imgFoto">
-                    <% } else { %>
-                        <img src="/images/tela-cadastro-prod/btn-img-prod.png" alt="Selecione uma imagem" id="imgFoto">
-                    <% } %>
+                   
                         <input class="inpt btn-cadastro-prod" type="file" id="file" name="file"  accept="image/*">
                         <span role="alert" id="imgError" aria-hidden="true">O campo imagem não pode estar vazio</span>
                 </div>
@@ -50,13 +42,13 @@
                     <em>
                         Preço:
                     </em>
-                    <input class="inpt preco" type="text" value="<%=produto? produto.valor:'' %>" placeholder="R$ 00,00">
+                    <input class="inpt preco" type="text" value="<%=produto.valor%>" placeholder="R$ 00,00">
                     <span role="alert" id="precoError" aria-hidden="true">O campo preço não pode estar vazio</span>
                     <em>
                         Categoria:
                     </em>
 
-                    <% if (produto!=null) {%>
+                    
                             <div class="radio">
                                 <input class="inpt radio" id='branco' type="radio" name="tipos-categorias" value="branco"
                                     <%=produto.tipo=="Vinho Branco" ? "checked" :"" %>>
@@ -82,32 +74,11 @@
                             </div>
 
                             <span role="alert" id="categoriaError" aria-hidden="true">O campo categoria não pode estar vazio</span>
-                    <%} else{%>
-
-                        <div class="radio">
-                            <input class="inpt radio" id='branco' type="radio" name="tipos-categorias" value="branco">
-                            <label for="branco">Branco</label>
-                        </div>
-                        <div class="radio">
-                            <input class="inpt radio" id='rose' type="radio" name="tipos-categorias" value="rose" >
-                            <label for="rose">Rose</label>
-                        </div>
-                        <div class="radio">
-                            <input class="inpt radio" id='tinto' type="radio" name="tipos-categorias" value="tinto">
-                            <label for="tinto">Tinto</label>
-                        </div>
-                        <div class="radio">
-                            <input class="inpt radio" id='espumante' type="radio" name="tipos-categorias" value="espumante">
-                            <label for="espumante">Espumante</label>
-                        </div>
-                        <span role="alert" id="categoriaError" aria-hidden="true">O campo categoria não pode estar
-                            vazio</span>
-
-                    <%}%>
+                    
                     
                 </div>
             </section>
-            <button id="btn-submit" type="submit">Salvar</button>
+            <button id="btn-submit" type="submit">Deletar</button>
             <span role="alert" id="descricaoSucess" aria-hidden="true">Seu produto foi cadastrado com sucesso!</span>
         </form>
 
